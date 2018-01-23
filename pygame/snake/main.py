@@ -53,7 +53,7 @@ class Game():
     
     def show_score(self, choice=1):
         s_font = pygame.font.SysFont('monaco', 24)
-        s_surf = s_font.render('Score: {0}'.format(self.score), True, self.black)
+        s_surf = s_font.render('Score: {0}'.format(self.score), True, self.white)
         s_rect = s_surf.get_rect()
         if choice == 1:
             s_rect.midtop = (80, 10)
@@ -149,7 +149,7 @@ while True:
     snake.validate_direction_and_change()
     snake.change_head_position()
     game.score, food.food_pos = snake.snake_body_mechanism(game.score, food.food_pos, game.screen_width, game.screen_height)
-    snake.draw_snake(game.play_surface, game.white)
+    snake.draw_snake(game.play_surface, game.black)
 
     food.draw_food(game.play_surface)
 
