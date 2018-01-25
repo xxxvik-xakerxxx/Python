@@ -41,7 +41,7 @@ class MyApp(QMainWindow):
         prem = int(self.ui.lineEdit_6.text())
         end = phen + yach + kuk + mk + fish + prem
 
-        if end > 100:
+        if end == 100:
             self.ui.label_12.setStyleSheet("color: rgb(0, 255, 60);")
             self.ui.label_12.setText(_translate("Dialog", str(end)))
         else:
