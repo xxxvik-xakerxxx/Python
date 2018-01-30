@@ -52,14 +52,14 @@ class MyApp(QMainWindow):
         radioButton_3 = self.sender()
 
         if radioButton_3.isChecked():
-            self.ui.label_26.setText(_translate("Dialog", "1"))
-            self.ui.label_27.setText(_translate("Dialog", "1"))
-            self.ui.label_28.setText(_translate("Dialog", "1"))
+            self.ui.label_26.setText(_translate("Dialog", "1290"))
+            self.ui.label_27.setText(_translate("Dialog", "20.5"))
+            self.ui.label_28.setText(_translate("Dialog", "5"))
             self.ui.label_29.setText(_translate("Dialog", "1"))
-            self.ui.label_30.setText(_translate("Dialog", "1"))
-            self.ui.label_31.setText(_translate("Dialog", "1"))
+            self.ui.label_30.setText(_translate("Dialog", "0.8"))
+            self.ui.label_31.setText(_translate("Dialog", "0.3"))
             self.ui.label_49.setText(_translate("Dialog", "1"))
-            self.ui.label_50.setText(_translate("Dialog", "1"))
+            self.ui.label_50.setText(_translate("Dialog", "0.43"))
 
     def calc(self):
         _translate = QtCore.QCoreApplication.translate
@@ -68,7 +68,7 @@ class MyApp(QMainWindow):
         kuk = float(self.ui.lineEdit_3.text())
         m_k = float(self.ui.lineEdit_4.text())
         fish = float(self.ui.lineEdit_5.text())
-        prem = float(self.ui.lineEdit_6.text())
+        prem_8184 = float(self.ui.lineEdit_6.text())
         gmih = float(self.ui.lineEdit_7.text())
         shr = float(self.ui.lineEdit_8.text())
         mk2 = float(self.ui.lineEdit_9.text())
@@ -76,7 +76,8 @@ class MyApp(QMainWindow):
         trm = float(self.ui.lineEdit_11.text())
         msrs = float(self.ui.lineEdit_12.text())
         r_k = float(self.ui.lineEdit_13.text())
-        end = phen + yach + kuk + m_k + fish + prem + gmih + shr + mk2 + yam + trm + msrs +r_k
+        prem_8203 = float(self.ui.lineEdit_14.text())
+        end = phen + yach + kuk + m_k + fish + prem_8184 + gmih + shr + mk2 + yam + trm + msrs +r_k + prem_8203
 
         if end == 100:
             self.ui.label_12.setStyleSheet("color: rgb(0, 255, 60);")
@@ -84,9 +85,9 @@ class MyApp(QMainWindow):
         else:
             self.ui.label_12.setStyleSheet("color: rgb(255, 0, 0);")
             self.ui.label_12.setText(_translate("Dialog", str(end)))
-        self.open_bd(phen, yach, kuk, m_k, fish, prem, gmih, shr, mk2, yam, trm, msrs, r_k)
+        self.open_bd(phen, yach, kuk, m_k, fish, prem_8184, gmih, shr, mk2, yam, trm, msrs, r_k, prem_8203)
 
-    def open_bd(self, phen, yach, kuk, m_k, fish, prem, gmih, shr, mk2, yam, trm, msrs, r_k):
+    def open_bd(self, phen, yach, kuk, m_k, fish, prem_8184, gmih, shr, mk2, yam, trm, msrs, r_k, prem_8203):
         fille = open("./data/phen.ini", "r")
         kdg_phen = float(''.join(re.findall(r'\d+', fille.readline())))
         sp_phen = float(''.join(re.findall(r'\d+', fille.readline())))
@@ -142,15 +143,15 @@ class MyApp(QMainWindow):
         met_fish = float(''.join(re.findall(r'\d+', fille.readline())))
         fille.close()
 
-        fille = open("./data/prem.ini", "r")
-        kdg_prem = float(''.join(re.findall(r'\d+', fille.readline())))
-        sp_prem = float(''.join(re.findall(r'\d+', fille.readline())))
-        sk_prem = float(''.join(re.findall(r'\d+', fille.readline())))
-        cal_prem = float(''.join(re.findall(r'\d+', fille.readline())))
-        fos_prem = float(''.join(re.findall(r'\d+', fille.readline())))
-        na_prem = float(''.join(re.findall(r'\d+', fille.readline())))
-        liz_prem = float(''.join(re.findall(r'\d+', fille.readline())))
-        met_prem = float(''.join(re.findall(r'\d+', fille.readline())))
+        fille = open("./data/prem_8184.ini", "r")
+        kdg_prem_8184 = float(''.join(re.findall(r'\d+', fille.readline())))
+        sp_prem_8184 = float(''.join(re.findall(r'\d+', fille.readline())))
+        sk_prem_8184 = float(''.join(re.findall(r'\d+', fille.readline())))
+        cal_prem_8184 = float(''.join(re.findall(r'\d+', fille.readline())))
+        fos_prem_8184 = float(''.join(re.findall(r'\d+', fille.readline())))
+        na_prem_8184 = float(''.join(re.findall(r'\d+', fille.readline())))
+        liz_prem_8184 = float(''.join(re.findall(r'\d+', fille.readline())))
+        met_prem_8184 = float(''.join(re.findall(r'\d+', fille.readline())))
         fille.close()
 
         fille = open("./data/gmih.ini", "r")
@@ -230,14 +231,25 @@ class MyApp(QMainWindow):
         met_r_k = float(''.join(re.findall(r'\d+', fille.readline())))
         fille.close()
 
-        kdg = ((kdg_phen/100) * phen) + ((kdg_yach/100) * yach) + ((kdg_kuk/100) * kuk) + ((kdg_m_k/100) * m_k) + ((kdg_fish/100) * fish) + ((kdg_prem/100) * prem) + ((kdg_gmih/100) * gmih) + ((kdg_shr/100) * shr) + ((kdg_mk2/100) * mk2) + ((kdg_yam/100) * yam) + ((kdg_trm/100) * trm) + ((kdg_msrs/100) * msrs) + ((kdg_r_k/100) * r_k)
-        sp = ((sp_phen/1000) * phen) + ((sp_yach/1000) * yach) + ((sp_kuk/100) * kuk) + ((sp_m_k/1000) * m_k) + ((sp_fish/1000) * fish) + ((sp_prem/10000) * prem) + ((sp_gmih/1000) * gmih) + ((sp_shr/100) * shr) + ((sp_mk2/100) * mk2) + ((sp_yam/100) * yam) + ((sp_trm/1000) * trm) + ((sp_msrs/1000) * msrs) + ((sp_r_k/100) * r_k)
-        sk = ((sk_phen/1000) * phen) + ((sk_yach/1000) * yach) + ((sk_kuk/1000) * kuk) + ((sk_m_k/100) * m_k) + ((sk_fish/100) * fish) + ((sk_prem/100) * prem) + ((sk_gmih/100) * gmih) + ((sk_shr/100) * shr) + ((sk_mk2/100) * mk2) + ((sk_yam/100) * yam) + ((sk_trm/100) * trm) + ((sk_msrs/100) * msrs) + ((sk_r_k/100) * r_k)
-        cal =((cal_phen/10000) * phen) + ((cal_yach/10000) * yach) + ((cal_kuk/10000) * kuk) + ((cal_m_k/1000) * m_k) + ((cal_fish/1000) * fish) + ((cal_prem/100) * prem) + ((cal_gmih/10000) * gmih) + ((cal_shr/10000) * shr) + ((cal_mk2/10000) * mk2) + ((cal_yam/10000) * yam) + ((cal_trm/10000) * trm) + ((cal_msrs/100) * msrs) + ((cal_r_k/100) * r_k) 
-        fos = ((fos_phen/1000) * phen) + ((fos_yach/10000) * yach) + ((fos_kuk/1000) * kuk) + ((fos_m_k/10000) * m_k) + ((fos_fish/1000) * fish) + ((fos_prem/10000) * prem) + ((fos_gmih/10000) * gmih) + ((fos_shr/10000) * shr) + ((fos_mk2/10000) * mk2) + ((fos_yam/10000) * yam) + ((fos_trm/10000) * trm) + ((fos_msrs/100) * msrs) + ((fos_r_k/100) * r_k)
-        na = ((na_phen/10000) * phen) + ((na_yach/10000) * yach) + ((na_kuk/10000) * kuk) + ((na_m_k/10000) * m_k) + ((na_fish/10000) * fish) + ((na_prem/100) * prem) + ((na_gmih/10000) * gmih) + ((na_shr/10000) * shr) + ((na_mk2/10000) * mk2) + ((na_yam/100) * yam) + ((na_trm/10000) * trm) + ((na_msrs/100) * msrs) + ((na_r_k/100) * r_k)
-        liz = ((liz_phen/10000) * phen) + ((liz_yach/1000) * yach) + ((liz_kuk/10000) * kuk) + ((liz_m_k/10000) * m_k) + ((liz_fish/10000) * fish) + ((liz_prem/10000) * prem) + ((liz_gmih/10000) * gmih) + ((liz_shr/10000) * shr) + ((liz_mk2/10000) * mk2) + ((liz_yam/10000) * yam) + ((liz_trm/10000) * trm) + ((liz_msrs/100) * msrs) + ((liz_r_k/100) * r_k)
-        met = ((met_phen/10000) * phen) + ((met_yach/10000) * yach) + ((met_kuk/10000) * kuk) + ((met_m_k/1000) * m_k) + ((met_fish/10000) * fish) + ((met_prem/10000) * prem) + ((met_gmih/10000) * gmih) + ((met_shr/1000) * shr) + ((met_mk2/10000) * mk2) + ((met_yam/10000) * yam) + ((met_trm/10000) * trm) + ((met_msrs/100) * msrs) + ((met_r_k/100) * r_k)
+        fille = open("./data/prem_8203.ini", "r")
+        kdg_prem_8203 = float(''.join(re.findall(r'\d+', fille.readline())))
+        sp_prem_8203 = float(''.join(re.findall(r'\d+', fille.readline())))
+        sk_prem_8203 = float(''.join(re.findall(r'\d+', fille.readline())))
+        cal_prem_8203 = float(''.join(re.findall(r'\d+', fille.readline())))
+        fos_prem_8203 = float(''.join(re.findall(r'\d+', fille.readline())))
+        na_prem_8203 = float(''.join(re.findall(r'\d+', fille.readline())))
+        liz_prem_8203 = float(''.join(re.findall(r'\d+', fille.readline())))
+        met_prem_8203 = float(''.join(re.findall(r'\d+', fille.readline())))
+        fille.close()
+
+        kdg = ((kdg_phen/100) * phen) + ((kdg_yach/100) * yach) + ((kdg_kuk/100) * kuk) + ((kdg_m_k/100) * m_k) + ((kdg_fish/100) * fish) + ((kdg_prem_8184/100) * prem_8184) + ((kdg_prem_8203/100) * prem_8203)  + ((kdg_gmih/100) * gmih) + ((kdg_shr/100) * shr) + ((kdg_mk2/100) * mk2) + ((kdg_yam/100) * yam) + ((kdg_trm/100) * trm) + ((kdg_msrs/100) * msrs) + ((kdg_r_k/100) * r_k)
+        sp = ((sp_phen/1000) * phen) + ((sp_yach/1000) * yach) + ((sp_kuk/100) * kuk) + ((sp_m_k/1000) * m_k) + ((sp_fish/1000) * fish) + ((sp_prem_8184/10000) * prem_8184) + ((sp_prem_8203/100) * prem_8203)  + ((sp_gmih/1000) * gmih) + ((sp_shr/100) * shr) + ((sp_mk2/100) * mk2) + ((sp_yam/100) * yam) + ((sp_trm/1000) * trm) + ((sp_msrs/1000) * msrs) + ((sp_r_k/100) * r_k)
+        sk = ((sk_phen/1000) * phen) + ((sk_yach/1000) * yach) + ((sk_kuk/1000) * kuk) + ((sk_m_k/100) * m_k) + ((sk_fish/100) * fish) + ((sk_prem_8184/100) * prem_8184) + ((sk_prem_8203/100) * prem_8203) + ((sk_gmih/100) * gmih) + ((sk_shr/100) * shr) + ((sk_mk2/100) * mk2) + ((sk_yam/100) * yam) + ((sk_trm/100) * trm) + ((sk_msrs/100) * msrs) + ((sk_r_k/100) * r_k)
+        cal =((cal_phen/10000) * phen) + ((cal_yach/10000) * yach) + ((cal_kuk/10000) * kuk) + ((cal_m_k/1000) * m_k) + ((cal_fish/1000) * fish) + ((cal_prem_8184/100) * prem_8184) + ((cal_prem_8203/10000) * prem_8203)  + ((cal_gmih/10000) * gmih) + ((cal_shr/10000) * shr) + ((cal_mk2/10000) * mk2) + ((cal_yam/10000) * yam) + ((cal_trm/10000) * trm) + ((cal_msrs/100) * msrs) + ((cal_r_k/100) * r_k) 
+        fos = ((fos_phen/1000) * phen) + ((fos_yach/10000) * yach) + ((fos_kuk/1000) * kuk) + ((fos_m_k/10000) * m_k) + ((fos_fish/1000) * fish) + ((fos_prem_8184/10000) * prem_8184) + ((fos_prem_8203/10000) * prem_8203) + ((fos_gmih/10000) * gmih) + ((fos_shr/10000) * shr) + ((fos_mk2/10000) * mk2) + ((fos_yam/10000) * yam) + ((fos_trm/10000) * trm) + ((fos_msrs/100) * msrs) + ((fos_r_k/100) * r_k)
+        na = ((na_phen/10000) * phen) + ((na_yach/10000) * yach) + ((na_kuk/10000) * kuk) + ((na_m_k/10000) * m_k) + ((na_fish/10000) * fish) + ((na_prem_8184/100) * prem_8184) + ((na_prem_8203/1000) * prem_8203)  + ((na_gmih/10000) * gmih) + ((na_shr/10000) * shr) + ((na_mk2/10000) * mk2) + ((na_yam/100) * yam) + ((na_trm/10000) * trm) + ((na_msrs/100) * msrs) + ((na_r_k/100) * r_k)
+        liz = ((liz_phen/10000) * phen) + ((liz_yach/1000) * yach) + ((liz_kuk/10000) * kuk) + ((liz_m_k/10000) * m_k) + ((liz_fish/10000) * fish) + ((liz_prem_8184/10000) * prem_8184) + ((liz_prem_8203/10000) * prem_8203)  + ((liz_gmih/10000) * gmih) + ((liz_shr/10000) * shr) + ((liz_mk2/10000) * mk2) + ((liz_yam/10000) * yam) + ((liz_trm/10000) * trm) + ((liz_msrs/100) * msrs) + ((liz_r_k/100) * r_k)
+        met = ((met_phen/10000) * phen) + ((met_yach/10000) * yach) + ((met_kuk/10000) * kuk) + ((met_m_k/1000) * m_k) + ((met_fish/10000) * fish) + ((met_prem_8184/10000) * prem_8184) + ((met_prem_8203/10000) * prem_8203) + ((met_gmih/10000) * gmih) + ((met_shr/1000) * shr) + ((met_mk2/10000) * mk2) + ((met_yam/10000) * yam) + ((met_trm/10000) * trm) + ((met_msrs/100) * msrs) + ((met_r_k/100) * r_k)
 
         self.calc_end(kdg, sp, sk, cal, fos, na, liz, met)
         
