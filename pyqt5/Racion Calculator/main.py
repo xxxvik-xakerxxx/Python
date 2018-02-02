@@ -38,14 +38,14 @@ class MyApp(QMainWindow):
         radioButton_2 = self.sender()
 
         if radioButton_2.isChecked():
-            self.ui.label_26.setText(_translate("Dialog", "1"))
-            self.ui.label_27.setText(_translate("Dialog", "1"))
-            self.ui.label_28.setText(_translate("Dialog", "1"))
-            self.ui.label_29.setText(_translate("Dialog", "1"))
-            self.ui.label_30.setText(_translate("Dialog", "1"))
-            self.ui.label_31.setText(_translate("Dialog", "1"))
-            self.ui.label_49.setText(_translate("Dialog", "1"))
-            self.ui.label_50.setText(_translate("Dialog", "1"))
+            self.ui.label_26.setText(_translate("Dialog", "1130"))
+            self.ui.label_27.setText(_translate("Dialog", "17"))
+            self.ui.label_28.setText(_translate("Dialog", "5.5"))
+            self.ui.label_29.setText(_translate("Dialog", "3.1"))
+            self.ui.label_30.setText(_translate("Dialog", "0.7"))
+            self.ui.label_31.setText(_translate("Dialog", "0.3"))
+            self.ui.label_49.setText(_translate("Dialog", "0.75"))
+            self.ui.label_50.setText(_translate("Dialog", "0.32"))
 
     def per(self):
         _translate = QtCore.QCoreApplication.translate
