@@ -15,15 +15,11 @@ class MyApp(QMainWindow):
 
         self.ui.pushButton.clicked.connect(self.calc)
         self.ui.pushButton_4.clicked.connect(qApp.quit)
-        self.ui.radioButton.toggled.connect(self.dack)
-        self.ui.radioButton_2.toggled.connect(self.kur)
-        self.ui.radioButton_3.toggled.connect(self.per)
+        
 
-    def dack(self):
+    def calc(self):
         _translate = QtCore.QCoreApplication.translate
-        radioButton = self.sender()
-    
-        if radioButton.isChecked():
+        if self.ui.radioButton.isChecked():
             self.ui.label_26.setText(_translate("Dialog", "1173"))
             self.ui.label_27.setText(_translate("Dialog", "17.1"))
             self.ui.label_28.setText(_translate("Dialog", "5.5"))
@@ -33,11 +29,7 @@ class MyApp(QMainWindow):
             self.ui.label_49.setText(_translate("Dialog", "0.74"))
             self.ui.label_50.setText(_translate("Dialog", "0.34"))
 
-    def kur(self):
-        _translate = QtCore.QCoreApplication.translate
-        radioButton_2 = self.sender()
-
-        if radioButton_2.isChecked():
+        if self.ui.radioButton_2.isChecked():
             self.ui.label_26.setText(_translate("Dialog", "1130"))
             self.ui.label_27.setText(_translate("Dialog", "17"))
             self.ui.label_28.setText(_translate("Dialog", "5.5"))
@@ -47,11 +39,7 @@ class MyApp(QMainWindow):
             self.ui.label_49.setText(_translate("Dialog", "0.75"))
             self.ui.label_50.setText(_translate("Dialog", "0.32"))
 
-    def per(self):
-        _translate = QtCore.QCoreApplication.translate
-        radioButton_3 = self.sender()
-
-        if radioButton_3.isChecked():
+        if self.ui.radioButton_3.isChecked():
             self.ui.label_26.setText(_translate("Dialog", "1290"))
             self.ui.label_27.setText(_translate("Dialog", "20.5"))
             self.ui.label_28.setText(_translate("Dialog", "5"))
@@ -60,8 +48,9 @@ class MyApp(QMainWindow):
             self.ui.label_31.setText(_translate("Dialog", "0.3"))
             self.ui.label_49.setText(_translate("Dialog", "1"))
             self.ui.label_50.setText(_translate("Dialog", "0.43"))
+        self.sum_components()
 
-    def calc(self):
+    def sum_components(self):
         _translate = QtCore.QCoreApplication.translate
         phen = float(self.ui.lineEdit.text())
         yach = float(self.ui.lineEdit_2.text())
