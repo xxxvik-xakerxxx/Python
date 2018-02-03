@@ -2,13 +2,11 @@
 # -*- coding: utf-8 -*-
 
 import sys
-from PyQt5.QtWidgets import *
+from PyQt5.QtWidgets import QLabel, QLineEdit, QRadioButton, QPushButton, QMainWindow, QApplication, QWidget, qApp
 from PyQt5 import QtCore
 from res.ui import Ui_Dialog
-import re
 import sqlite3
-conn = sqlite3.connect('./data/data.db')
-c = conn.cursor()
+
 
 class MyApp(QMainWindow):
     def __init__(self):
@@ -68,7 +66,8 @@ class MyApp(QMainWindow):
         msrs = float(self.ui.lineEdit_12.text())
         r_k = float(self.ui.lineEdit_13.text())
         prem_8203 = float(self.ui.lineEdit_14.text())
-        end = phen + yach + kuk + m_k + fish + prem_8184 + gmih + shr + mk2 + yam + trm + msrs +r_k + prem_8203
+        end = (phen + yach + kuk + m_k + fish + prem_8184 + gmih +
+               shr + mk2 + yam + trm + msrs + r_k + prem_8203)
 
         if end == 100:
             self.ui.label_12.setStyleSheet("color: rgb(0, 255, 60);")
@@ -76,162 +75,120 @@ class MyApp(QMainWindow):
         else:
             self.ui.label_12.setStyleSheet("color: rgb(255, 0, 0);")
             self.ui.label_12.setText(_translate("Dialog", str(end)))
-        self.open_bd(phen, yach, kuk, m_k, fish, prem_8184, gmih, shr, mk2, yam, trm, msrs, r_k, prem_8203)
+        self.open_bd(phen, yach, kuk, m_k, fish, prem_8184,
+                     gmih, shr, mk2, yam, trm, msrs, r_k, prem_8203)
 
-    def open_bd(self, phen, yach, kuk, m_k, fish, prem_8184, gmih, shr, mk2, yam, trm, msrs, r_k, prem_8203):
+    def calculate_equation(self, row, defaults):
+        val_phen = row[0][0]
+        val_yach = row[1][0]
+        val_kuk = row[2][0]
+        val_fish = row[3][0]
+        val_mk2 = row[4][0]
+        val_m_k = row[5][0]
+        val_yam = row[6][0]
+        val_gmih = row[7][0]
+        val_shr = row[8][0]
+        val_msrs = row[9][0]
+        val_trm = row[10][0]
+        val_r_k = row[11][0]
+        val_prem_8203 = row[12][0]
+        val_prem_8184 = row[13][0]
+
+        (phen,
+         yach,
+         kuk,
+         fish,
+         mk2,
+         m_k,
+         yam,
+         gmih,
+         shr,
+         msrs,
+         trm,
+         r_k,
+         prem_8203,
+         prem_8184) = defaults
+
+        return ((val_phen * phen) +
+                (val_yach * yach) +
+                (val_kuk * kuk) +
+                (val_m_k * m_k) +
+                (val_fish * fish) +
+                (val_prem_8184 * prem_8184) +
+                (val_prem_8203 * prem_8203) +
+                (val_gmih * gmih) +
+                (val_shr * shr) +
+                (val_mk2 * mk2) +
+                (val_yam * yam) +
+                (val_trm * trm) +
+                (val_msrs * msrs) +
+                (val_r_k * r_k)) / 100
+
+    def open_bd(self, phen, yach, kuk, m_k, fish, prem_8184,
+                gmih, shr, mk2, yam, trm, msrs, r_k, prem_8203):
+
+        defaults = (
+            phen,
+            yach,
+            kuk,
+            fish,
+            mk2,
+            m_k,
+            yam,
+            gmih,
+            shr,
+            msrs,
+            trm,
+            r_k,
+            prem_8203,
+            prem_8184
+        )
+
+        conn = sqlite3.connect('./data/data.db')
+        c = conn.cursor()
+        c.execute("SELECT  COUNT(post_id) FROM komponents")
+        st_col = c.fetchone()
         c.execute("SELECT  kdg FROM komponents")
-        row = c.fetchmany(14)
-        kdg_phen = row[0][0]
-        kdg_yach = row[1][0]
-        kdg_kuk = row [2][0]
-        kdg_fish = row[3][0]
-        kdg_mk2 = row[4][0]
-        kdg_m_k = row[5][0]
-        kdg_yam = row[6][0]
-        kdg_gmih = row[7][0]
-        kdg_shr = row[8][0]
-        kdg_msrs = row[9][0]
-        kdg_trm = row[10][0]
-        kdg_r_k = row[11][0]
-        kdg_prem_8203 = row[12][0]
-        kdg_prem_8184 = row[13][0]
-        
+        row_kdg = c.fetchmany(st_col[0])
+
         c.execute("SELECT  sp FROM komponents")
-        row = c.fetchmany(14)
-        sp_phen =  row[0][0]
-        sp_yach = row[1][0]
-        sp_kuk = row [2][0]
-        sp_fish = row[3][0]
-        sp_mk2 = row[4][0]
-        sp_m_k = row[5][0]
-        sp_yam = row[6][0]
-        sp_gmih = row[7][0]
-        sp_shr = row[8][0]
-        sp_msrs = row[9][0]
-        sp_trm = row[10][0]
-        sp_r_k = row[11][0]
-        sp_prem_8203 = row[12][0]
-        sp_prem_8184 = row[13][0]
+        row_sp = c.fetchmany(st_col[0])
 
         c.execute("SELECT  sk FROM komponents")
-        row = c.fetchmany(14)
-        sk_phen =  row[0][0]
-        sk_yach = row[1][0]
-        sk_kuk = row [2][0]
-        sk_fish = row[3][0]
-        sk_mk2 = row[4][0]
-        sk_m_k = row[5][0]
-        sk_yam = row[6][0]
-        sk_gmih = row[7][0]
-        sk_shr = row[8][0]
-        sk_msrs = row[9][0]
-        sk_trm = row[10][0]
-        sk_r_k = row[11][0]
-        sk_prem_8203 = row[12][0]
-        sk_prem_8184 = row[13][0]
-        
+        row_sk = c.fetchmany(st_col[0])
+
         c.execute("SELECT  cal FROM komponents")
-        row = c.fetchmany(14)
-        cal_phen =  row[0][0]
-        cal_yach = row[1][0]
-        cal_kuk = row [2][0]
-        cal_fish = row[3][0]
-        cal_mk2 = row[4][0]
-        cal_m_k = row[5][0]
-        cal_yam = row[6][0]
-        cal_gmih = row[7][0]
-        cal_shr = row[8][0]
-        cal_msrs = row[9][0]
-        cal_trm = row[10][0]
-        cal_r_k = row[11][0]
-        cal_prem_8203 = row[12][0]
-        cal_prem_8184 = row[13][0]
-        
+        row_cal = c.fetchmany(st_col[0])
+
         c.execute("SELECT  fos FROM komponents")
-        row = c.fetchmany(14)
-        fos_phen =  row[0][0]
-        fos_yach = row[1][0]
-        fos_kuk = row [2][0]
-        fos_fish = row[3][0]
-        fos_mk2 = row[4][0]
-        fos_m_k = row[5][0]
-        fos_yam = row[6][0]
-        fos_gmih = row[7][0]
-        fos_shr = row[8][0]
-        fos_msrs = row[9][0]
-        fos_trm = row[10][0]
-        fos_r_k = row[11][0]
-        fos_prem_8203 = row[12][0]
-        fos_prem_8184 = row[13][0]
-        
+        row_fos = c.fetchmany(st_col[0])
+
         c.execute("SELECT  na FROM komponents")
-        row = c.fetchmany(14)
-        na_phen =  row[0][0]
-        na_yach = row[1][0]
-        na_kuk = row [2][0]
-        na_fish = row[3][0]
-        na_mk2 = row[4][0]
-        na_m_k = row[5][0]
-        na_yam = row[6][0]
-        na_gmih = row[7][0]
-        na_shr = row[8][0]
-        na_msrs = row[9][0]
-        na_trm = row[10][0]
-        na_r_k = row[11][0]
-        na_prem_8203 = row[12][0]
-        na_prem_8184 = row[13][0]
+        row_na = c.fetchmany(st_col[0])
 
         c.execute("SELECT liz FROM komponents")
-        row = c.fetchmany(14)
-        liz_phen =  row[0][0]
-        liz_yach = row[1][0]
-        liz_kuk = row [2][0]
-        liz_fish = row[3][0]
-        liz_mk2 = row[4][0]
-        liz_m_k = row[5][0]
-        liz_yam = row[6][0]
-        liz_gmih = row[7][0]
-        liz_shr = row[8][0]
-        liz_msrs = row[9][0]
-        liz_trm = row[10][0]
-        liz_r_k = row[11][0]
-        liz_prem_8203 = row[12][0]
-        liz_prem_8184 = row[13][0]
-         
+        row_liz = c.fetchmany(st_col[0])
+
         c.execute("SELECT met FROM komponents")
-        row = c.fetchmany(14)
-        met_phen =  row[0][0]
-        met_yach = row[1][0]
-        met_kuk = row [2][0]
-        met_fish = row[3][0]
-        met_mk2 = row[4][0]
-        met_m_k = row[5][0]
-        met_yam = row[6][0]
-        met_gmih = row[7][0]
-        met_shr = row[8][0]
-        met_msrs = row[9][0]
-        met_trm = row[10][0]
-        met_r_k = row[11][0]
-        met_prem_8203 = row[12][0]
-        met_prem_8184 = row[13][0]
+        row_met = c.fetchmany(st_col[0])
 
         c.close()
-        conn.close()        
+        conn.close()
 
-        kdg = ((kdg_phen*phen)+(kdg_yach* yach) + (kdg_kuk* kuk) + (kdg_m_k* m_k) + (kdg_fish* fish) + (kdg_prem_8184* prem_8184) + (kdg_prem_8203* prem_8203)  + (kdg_gmih* gmih) + (kdg_shr* shr) + (kdg_mk2* mk2) + (kdg_yam* yam) + (kdg_trm* trm) + (kdg_msrs* msrs) + (kdg_r_k* r_k))/100
-        sp = ((sp_phen* phen) + (sp_yach* yach) + (sp_kuk* kuk) + (sp_m_k* m_k) + (sp_fish* fish) + (sp_prem_8184* prem_8184) + (sp_prem_8203* prem_8203)  + (sp_gmih* gmih) + (sp_shr* shr) + (sp_mk2* mk2) + (sp_yam* yam) + (sp_trm* trm) + (sp_msrs* msrs) + (sp_r_k* r_k))/100
-        sk = ((sk_phen* phen) + (sk_yach* yach) + (sk_kuk* kuk) + (sk_m_k* m_k) + (sk_fish* fish) + (sk_prem_8184* prem_8184) + (sk_prem_8203* prem_8203) + (sk_gmih* gmih) + (sk_shr* shr) + (sk_mk2* mk2) + (sk_yam* yam) + (sk_trm* trm) + (sk_msrs * msrs) + (sk_r_k* r_k))/100
-        cal =((cal_phen* phen) + (cal_yach* yach) + (cal_kuk* kuk) + (cal_m_k* m_k) + (cal_fish* fish) + (cal_prem_8184* prem_8184) + (cal_prem_8203* prem_8203)  + (cal_gmih* gmih) + (cal_shr* shr) + (cal_mk2* mk2) + (cal_yam* yam) + (cal_trm* trm) + (cal_msrs* msrs) + (cal_r_k* r_k))/100 
-        fos = ((fos_phen* phen) + (fos_yach* yach) + (fos_kuk* kuk) + (fos_m_k* m_k) + (fos_fish* fish) + (fos_prem_8184* prem_8184) + (fos_prem_8203* prem_8203) + (fos_gmih* gmih) + (fos_shr* shr) + (fos_mk2* mk2) + (fos_yam* yam) + (fos_trm* trm) + (fos_msrs* msrs) + (fos_r_k* r_k))/100
-        na = ((na_phen* phen) + (na_yach* yach) + (na_kuk* kuk) + (na_m_k* m_k) + (na_fish* fish) + (na_prem_8184* prem_8184) + (na_prem_8203* prem_8203)  + (na_gmih* gmih) + (na_shr* shr) + (na_mk2* mk2) + (na_yam* yam) + (na_trm* trm) + (na_msrs* msrs) + (na_r_k* r_k))/100
-        liz = ((liz_phen* phen) + (liz_yach* yach) + (liz_kuk* kuk) + (liz_m_k* m_k) + (liz_fish* fish) + (liz_prem_8184* prem_8184) + (liz_prem_8203* prem_8203)  + (liz_gmih* gmih) + (liz_shr* shr) + (liz_mk2* mk2) + (liz_yam* yam) + (liz_trm* trm) + (liz_msrs* msrs) + (liz_r_k* r_k))/100
-        met = ((met_phen* phen) + (met_yach* yach) + (met_kuk* kuk) + (met_m_k* m_k) + (met_fish* fish) + (met_prem_8184* prem_8184) + (met_prem_8203* prem_8203) + (met_gmih* gmih) + (met_shr* shr) + (met_mk2* mk2) + (met_yam* yam) + (met_trm* trm) + (met_msrs* msrs) + (met_r_k* r_k))/100
+        kdg = self.calculate_equation(row_kdg, defaults)
+        sp = self.calculate_equation(row_sp, defaults)
+        sk = self.calculate_equation(row_sk, defaults)
+        cal = self.calculate_equation(row_cal, defaults)
+        fos = self.calculate_equation(row_fos, defaults)
+        na = self.calculate_equation(row_na, defaults)
+        liz = self.calculate_equation(row_liz, defaults)
+        met = self.calculate_equation(row_met, defaults)
 
         self.calc_end(kdg, sp, sk, cal, fos, na, liz, met)
-        
+
     def calc_end(self, kdg, sp, sk, cal, fos, na, liz, met):
         _translate = QtCore.QCoreApplication.translate
-        
+
         self.ui.label_20.setText(_translate("Dialog", str(kdg)))
         self.ui.label_21.setText(_translate("Dialog", str(sp)))
         self.ui.label_22.setText(_translate("Dialog", str(sk)))
@@ -313,6 +270,7 @@ class MyApp(QMainWindow):
         else:
             self.ui.label_52.setStyleSheet("color: rgb(255, 0, 0);")
             self.ui.label_52.setText(_translate("Dialog", str(otl_met)))
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
